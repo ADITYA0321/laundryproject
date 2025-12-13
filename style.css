@@ -100,10 +100,12 @@
   background: #005f8a;
   transform: scale(1.05);
 }
-.btn-link{
-  text-decoration:none;
-  
+.btn-link {
+  text-decoration: none;   /* underline हटाएगा */
+  color: inherit;          /* बटन का रंग लेगा */
+  display: inline-block;   /* block जैसा व्यवहार */
 }
+
 
 .hero-right img {
   width: 420px;
