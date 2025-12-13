@@ -104,6 +104,8 @@
   text-decoration: none;   /* underline हटाएगा */
   color: inherit;          /* बटन का रंग लेगा */
   display: inline-block;   /* block जैसा व्यवहार */
+  color:white;
+  font-weight:bold;
 }
 
 
