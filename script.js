@@ -8,10 +8,7 @@ let nameInput = document.querySelector('input[placeholder="Full Name"]');
 let emailInput = document.querySelector('input[placeholder="Email ID"]');
 let phoneInput = document.querySelector('input[placeholder="Phone Number"]');
 
-
-
 document.querySelectorAll(".service").forEach(service => {
-    
     let addBtn = service.querySelector(".add-btn");
     let removeBtn = service.querySelector(".remove-btn");
 
@@ -30,7 +27,6 @@ document.querySelectorAll(".service").forEach(service => {
     // REMOVE ITEM
     removeBtn.addEventListener("click", () => {
         let name = service.dataset.name;
-
         cartItems = cartItems.filter(item => item.name !== name);
         updateCart();
 
@@ -56,41 +52,19 @@ function updateCart() {
     });
 
     total.textContent = sum;
-
-    // 🔥 MOST IMPORTANT LINE
     toggleEmptyCart();
 
- 
-    if (cartItems.length === 0) {
-    bookBtn.disabled = true;  // disable when empty
-} else {
-    bookBtn.disabled = false; // enable when >=1 item
+    bookBtn.disabled = cartItems.length === 0;
+    if (cartItems.length > 0) errorMsg.style.display = "none";
 }
-
-   if (cartItems.length > 0) {
-    errorMsg.style.display = "none";
-}
-
-}
-
 
 function toggleEmptyCart() {
-    let cartBody = document.getElementById("cart-body");
     let empty = document.getElementById("empty-cart");
-
-    if (cartBody.children.length === 0) {
-        empty.style.display = "block";
-    } else {
-        empty.style.display = "none";
-    }
+    empty.style.display = cartBody.children.length === 0 ? "block" : "none";
 }
 
 function showErrorIfCartEmpty() {
-    if (cartItems.length === 0) {
-        errorMsg.style.display = "block";  // Show error
-    } else {
-        errorMsg.style.display = "none";   // Hide error
-    }
+    errorMsg.style.display = cartItems.length === 0 ? "block" : "none";
 }
 
 nameInput.addEventListener("focus", showErrorIfCartEmpty);
@@ -98,10 +72,8 @@ emailInput.addEventListener("focus", showErrorIfCartEmpty);
 phoneInput.addEventListener("focus", showErrorIfCartEmpty);
 
 bookBtn.addEventListener("click", () => {
-    // If cart empty, do nothing (error already shown)
     if (cartItems.length === 0) return;
 
-    // If any input empty → show red border (optional)
     if (
         nameInput.value.trim() === "" ||
         emailInput.value.trim() === "" ||
@@ -113,19 +85,22 @@ bookBtn.addEventListener("click", () => {
         return;
     }
 
-    // Success message show
+    // ✅ Show success message (instead of sending email)
     let success = document.getElementById("success-msg");
     success.style.display = "block";
+    success.innerHTML = "✅ Email has been sent successfully!";
 
-    // Reset form
+    // ✅ Reset form
     nameInput.value = "";
     emailInput.value = "";
     phoneInput.value = "";
 
-    // Optional: Hide success after 3 seconds
+    // ✅ Reset cart
+    cartItems = [];
+    updateCart();
+
+    // Hide success after 3 seconds
     setTimeout(() => {
         success.style.display = "none";
     }, 3000);
 });
-
-
