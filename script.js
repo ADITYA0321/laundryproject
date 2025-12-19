@@ -85,21 +85,21 @@ bookBtn.addEventListener("click", () => {
         return;
     }
 
-    // ✅ Show success message (instead of sending email)
+  
     let success = document.getElementById("success-msg");
     success.style.display = "block";
-    success.innerHTML = "✅ Email has been sent successfully!";
+    success.innerHTML = " Email has been sent successfully!";
 
-    // ✅ Reset form
+  
     nameInput.value = "";
     emailInput.value = "";
     phoneInput.value = "";
 
-    // ✅ Reset cart
+    
     cartItems = [];
     updateCart();
 
-    // Hide success after 3 seconds
+    
     setTimeout(() => {
         success.style.display = "none";
     }, 3000);
